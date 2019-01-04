@@ -15,6 +15,7 @@
     "start": "node server/bin/www",
     "dev:clinet": "react-scripts start",
     "dev:server": "node server/bin/www PORT=3001",
+    "db": "mongod --config mongod.yaml",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
