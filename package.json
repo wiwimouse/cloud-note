@@ -12,9 +12,9 @@
     "react-scripts": "2.1.2"
   },
   "scripts": {
-    "start": "node server/bin/www",
+    "start": "NODE_ENV=production node src/server/bin/www",
     "dev:clinet": "react-scripts start",
-    "dev:server": "node server/bin/www PORT=3001",
+    "dev:server": "NODE_ENV=development PORT=3001 node server/bin/www",
     "db": "mongod --config mongod.yaml",
     "build": "react-scripts build",
     "test": "react-scripts test",
