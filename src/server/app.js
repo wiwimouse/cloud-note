@@ -4,8 +4,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
+const UserSchema = require('./models/user');
 const NoteSchema = require('./models/note');
 
+mongoose.model('User', UserSchema);
 mongoose.model('Note', NoteSchema);
 
 const apiRouter = require('./routes/api');
