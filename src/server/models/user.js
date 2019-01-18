@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const secret = 'asdf'
+const jwtSecret = require('../../../config').jwtSecret;
 
 const UserSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true, match: [/^[a-zA-Z0-9]+$/] },
@@ -24,10 +24,10 @@ UserSchema.methods.generateJWT = function () {
   const exp = new Date(today.setDate(today.getDate() + 60));
 
   return jwt.sign({
-    id: this._id,
+    id: this._id.toString(),
     username: this.username,
     exp: parseInt(exp.getTime() / 1000)
-  }, secret);
+  }, jwtSecret);
 }
 UserSchema.methods.toAuthJSON = function () {
   return {
