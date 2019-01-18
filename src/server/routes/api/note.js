@@ -8,6 +8,7 @@ const UserModel = mongoose.model('User');
 
 Router.param('slug', function (req, res, next, value) {
   NoteModel.findOne({ slug: value })
+    .populate('author')
     .then((note) => {
       if (!note) return res.sendStatus(404);
       req.note = note;
@@ -29,7 +30,7 @@ Router.post('/', mwJWT(), async function (req, res, next) {
 
     await note.save();
 
-    return res.sendStatus(200);
+    return res.json(note.toNoteJSON());
   } catch(err) {
     return next(err);
   }

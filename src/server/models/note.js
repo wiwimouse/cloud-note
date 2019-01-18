@@ -18,12 +18,12 @@ NoteSchema.methods.toNoteJSON = function () {
     note: {
       slug: this.slug,
       body: this.body,
-      author: this.author
+      author: this.author.username
     }
   }
 }
 NoteSchema.methods.isPermissioned = function (userId) {
-  return this.author.toString() ===  userId;
+  return this.author._id.toString() ===  userId;
 }
 
 module.exports = NoteSchema;
