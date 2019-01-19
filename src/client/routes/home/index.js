@@ -33,9 +33,16 @@ class Home extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-12">
-            {this.props.notes.map(o => <NoteCard key={o.note.slug} {...o.note} />)}
-          </div>
+          {
+            this.props.notes.map(o => (
+              <div
+                key={o.note.slug}
+                className="col-xs-12 col-md-6"
+              >
+                <NoteCard {...o.note} />
+              </div>
+            ))
+          }
         </div>
       </div>
     )
