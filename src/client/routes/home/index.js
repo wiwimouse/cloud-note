@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 import Panel from 'react-bootstrap/lib/Panel';
 
 const NoteCard = ({ slug, body, updatedAt }) => (
-  <Link to={`/${slug}`}>
+  <Link
+    to={`/${slug}`}
+    className="text-black hover:text-black hover:no-underline"
+  >
     <Panel>
       <Panel.Body>
-        <p>{body}</p>
+        <h3 className="truncate">{body}</h3>
         <p className="mt-2 text-grey-darkest">
           <span className="glyphicon glyphicon-time" />
           <span className="ml-2">{new Date(updatedAt).toLocaleString()}</span>
