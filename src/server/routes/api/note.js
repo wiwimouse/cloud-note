@@ -17,6 +17,18 @@ Router.param('slug', function (req, res, next, value) {
     .catch(next);
 });
 
+Router.get('/', mwJWT(), async function (req, res, next) {
+  try {
+    const notes = await NoteModel.find({
+      author: mongoose.Types.ObjectId(req.user.id),
+    });
+
+    res.json(notes.map(o => o.toNoteJSON()));
+  } catch (err) {
+    return next(err)
+  }
+})
+
 Router.post('/', mwJWT(), async function (req, res, next) {
   try {
     const user = await UserModel.findById(req.user.id);
@@ -31,7 +43,7 @@ Router.post('/', mwJWT(), async function (req, res, next) {
     await note.save();
 
     return res.json(note.toNoteJSON());
-  } catch(err) {
+  } catch (err) {
     return next(err);
   }
 });
@@ -54,7 +66,7 @@ Router.put('/:slug', mwJWT(), async function (req, res, next) {
   try {
     await req.note.save();
     return res.json(req.note.toNoteJSON());
-  } catch(err) {
+  } catch (err) {
     return next(err);
   }
 });
@@ -68,7 +80,7 @@ Router.delete('/:slug', mwJWT(), async function (req, res, next) {
     await req.note.remove();
     return res.sendStatus(200);
   } catch (err) {
-    return next(next);
+    return next(err);
   }
 })
 

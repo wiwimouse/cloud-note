@@ -18,7 +18,9 @@ NoteSchema.methods.toNoteJSON = function () {
     note: {
       slug: this.slug,
       body: this.body,
-      author: this.author.username
+      author: this.author.username,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
     }
   }
 }

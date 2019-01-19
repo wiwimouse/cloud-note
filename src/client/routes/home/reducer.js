@@ -1,7 +1,17 @@
+import { types } from './action';
+
 const initialState = {
-  test: '123',
+  notes: [],
 };
 
 export default (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case types.GET_NOTES:
+      return {
+        ...state,
+        notes: action.payload,
+      }
+    default:
+      return state;
+  }
 };
