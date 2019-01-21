@@ -16,6 +16,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "prop-types": "^15.6.2",
+    "quill-delta": "^4.1.0",
     "react": "^16.7.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0",

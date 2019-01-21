@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import App from './components/App';
 import store from './store';
+import 'react-quill/dist/quill.snow.css';
 
 const Root = () => (
   <Provider store={store}>

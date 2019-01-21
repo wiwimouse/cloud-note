@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Home from '../routes/home';
 import Note from '../routes/note';
 
@@ -7,8 +7,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route path="/" exact component={Home} />
-        <Route path="/:slug" component={Note}/>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/new" component={Note} />
+          <Route path="/:slug" render={props => <Note slug={props.match.params.slug} />} />
+        </Switch>
       </div>
     );
   }
