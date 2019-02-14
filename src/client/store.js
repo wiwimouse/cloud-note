@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
+import user from './reducers/user';
 import home from './routes/home/reducer';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const rootReducer = combineReducers({
+  user,
   home,
 });
 

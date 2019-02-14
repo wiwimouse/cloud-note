@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import Grid from 'react-bootstrap/lib/Grid';
 import Col from 'react-bootstrap/lib/Col';
 import Form from 'react-bootstrap/lib/Form';
@@ -6,9 +9,15 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Button from 'react-bootstrap/lib/Button';
-import { user as apiUser } from '../../api';
+
+import history from '../../history'
+import { login, register } from '../../actions/user';
 
 class Login extends Component {
+  static propTypes = {
+    login: propTypes.func,
+    register: propTypes.func
+  }
 
   state = {
     username: '',
@@ -18,12 +27,12 @@ class Login extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = await apiUser.login(
-        this.state.username,
-        this.state.password
-      )
+      await this.props.login({
+        username: this.state.username,
+        password: this.state.password
+      })
 
-      console.log(user);
+      history.push('/')
     } catch (err) {
       console.error(err);
     }
@@ -64,4 +73,7 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(
+  null,
+  { login, register }
+)(Login);
